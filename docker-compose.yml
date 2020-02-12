@@ -30,4 +30,4 @@ services:
     command: /bin/sh -c "while true; do echo faking deamon; sleep 60; done"
     # command: python manage.py runserver 0.0.0.0:8000
     depends_on:
-      - db
+      - mwae_db

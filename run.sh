@@ -5,6 +5,11 @@ if [[ $1 = "init" ]]; then
   exit 1
 fi
 
+if [[ $1 = "build" ]]; then
+  docker-compose build
+  exit 1
+fi
+
 if [[ $1 = "back" ]]; then
   docker exec -it mwae_core_container /bin/bash
   exit 1
