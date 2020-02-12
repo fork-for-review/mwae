@@ -1,0 +1,28 @@
+version: '3'
+services:
+  mwae_client:
+    container_name: mwae_client_container
+    build:
+      context: ./client
+      dockerfile: ./docker/nodejs/Dockerfile
+    volumes:
+      - ./client/workdir:/workdir
+      - ./volumes/data:/data
+    ports:
+      - "21030:3000"
+    command: /bin/sh -c "while true; do echo faking deamon; sleep 60; done"
+    # command: yarn start
+
+
+  mwae_core:
+    container_name: mwae_core_container
+    build:
+      context: ./core
+      dockerfile: './docker/django/Dockerfile'
+    volumes:
+      - ./core/workdir:/workdir
+      - ./volumes/data:/data
+    ports:
+      - "21080:8000"
+    command: /bin/sh -c "while true; do echo faking deamon; sleep 60; done"
+    # command: python manage.py runserver 0.0.0.0:8000

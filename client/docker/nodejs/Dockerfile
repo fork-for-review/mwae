@@ -1,0 +1,17 @@
+FROM node
+
+# PRE CONFIGURATION, optimization for docker-compose building
+RUN mkdir /workdir
+
+
+## INSTALL SECTION
+RUN apt-get -qq update && apt-get -qqy upgrade
+
+WORKDIR /opt
+COPY /workdir/package.json /opt/.
+RUN yarn
+
+
+## SUFFIX CONFIGURATION
+RUN echo "Europe/Moscow" > /etc/timezone
+WORKDIR /workdir
