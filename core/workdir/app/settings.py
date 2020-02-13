@@ -38,6 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    # A Django App that adds Cross-Origin Resource Sharing headers to responses
+    'corsheaders',
+
     # GraphQl-server implementation framework
     'graphene_django',
 
