@@ -1,11 +1,11 @@
 import React from 'react';
 
 /* Components */
-import { Posts } from './Posts';
+import { Main } from './Main';
 
 function App() {
   return <>
-    <Posts />
+    <Main />
   </>;
 }
 
