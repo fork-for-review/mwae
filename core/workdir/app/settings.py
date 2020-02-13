@@ -37,6 +37,15 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # A Django App that adds Cross-Origin Resource Sharing headers to responses
+    'corsheaders',
+
+    # GraphQl-server implementation framework
+    'graphene_django',
+
+    # Own applications
+    'post',
 ]
 
 MIDDLEWARE = [
@@ -47,6 +56,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    # Needed for django-cors-headers
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'app.urls'
@@ -121,3 +133,13 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# Graphene schema file location
+GRAPHENE = {
+    'SCHEMA': 'app.schema.schema',
+}
+
+# CORS access settings
+CORS_ORIGIN_WHITELIST = (
+    '127.0.0.1:21030',
+)
