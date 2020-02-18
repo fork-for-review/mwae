@@ -1,9 +1,10 @@
-import React from 'react'
+export const jsCode = `import React from 'react';
 import { QueryRenderer, graphql } from 'react-relay';
-import environment from '../Environment';
+import environment from '../../../Environment';
 
-const PostsQuery = graphql`
-query PostsQuery {
+/* Query */
+const SimpleQuery = graphql\`
+query SimpleQuery {
   posts {
     edges {
       node {
@@ -15,21 +16,13 @@ query PostsQuery {
     }
   }
 }
-`;
+\`;
 
-const Post = ({title, text, createdDate}) => (
-  <div>
-    <h4>{title}</h4>
-    <p>{createdDate}</p>
-    <hr />
-    <p>{text}</p>
-  </div>
-);
 
-export const Posts = () => (
+export const Simple = () => (
   <QueryRenderer
     environment={environment}
-    query={PostsQuery}
+    query={SimpleQuery}
     render={({error, props}) => {
       if (error) return <div>{error.message}</div>;
       else if (props) return <div>
@@ -46,3 +39,4 @@ export const Posts = () => (
     }}
   />
 );
+`;

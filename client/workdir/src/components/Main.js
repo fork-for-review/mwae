@@ -1,5 +1,8 @@
 import React from 'react';
 
+/* Router */
+import { Route, Switch } from 'react-router-dom';
+
 /* Bootstrap layout components */
 import {
   Col,
@@ -11,10 +14,13 @@ import {
 import styled from 'styled-components';
 
 /* Components */
-import { Posts } from './Posts';
 import { Nav } from './Nav';
-import { NavigationBreadcrumb } from './NavigationBreadcrumb';
 import { SideNav } from './SideNav';
+
+/* Sections */
+import { Queries } from './queries/Queries';
+import { Simple } from './queries/Simple/Simple';
+
 
 const StyledMain = styled.div`
   .row {
@@ -40,8 +46,23 @@ export const Main = () => (
         </Col>
         {/* Main info */}
         <Col xs="9">
-          <NavigationBreadcrumb />
-          <Posts />
+          <Switch>
+
+            <Route exact path='/' component={() => (
+              <p>Main</p>
+            )}/>
+
+            <Route exact path='/queries' component={() => (
+              <Queries />
+            )}/>
+
+            <Route exact path='/queries/simple' component={(props) => (
+              <Simple
+                {...props}
+              />
+            )}/>
+
+          </Switch>
         </Col>
 
       </Row>
