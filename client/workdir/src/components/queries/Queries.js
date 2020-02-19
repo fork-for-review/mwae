@@ -15,6 +15,7 @@ export const Queries = () => (
     </Breadcrumb>
     <ListGroup>
       <ListGroupItem tag="a" href="/queries/simple">Simple Query</ListGroupItem>
+      <ListGroupItem tag="a" href="/queries/arguments">Query With Arguments</ListGroupItem>
     </ListGroup>
   </div>
 );

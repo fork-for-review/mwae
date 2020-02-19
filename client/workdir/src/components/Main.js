@@ -20,6 +20,7 @@ import { SideNav } from './SideNav';
 /* Sections */
 import { Queries } from './queries/Queries';
 import { Simple } from './queries/Simple/Simple';
+import { WithArgs } from './queries/WithArgs/WithArgs';
 
 
 const StyledMain = styled.div`
@@ -58,6 +59,12 @@ export const Main = () => (
 
             <Route exact path='/queries/simple' component={(props) => (
               <Simple
+                {...props}
+              />
+            )}/>
+
+            <Route exact path='/queries/arguments' component={(props) => (
+              <WithArgs
                 {...props}
               />
             )}/>
