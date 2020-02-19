@@ -21,7 +21,7 @@ import { SideNav } from './SideNav';
 import { Queries } from './queries/Queries';
 import { Simple } from './queries/Simple/Simple';
 import { WithArgs } from './queries/WithArgs/WithArgs';
-
+import { Custom } from './queries/Custom/Custom';
 
 const StyledMain = styled.div`
   .row {
@@ -65,6 +65,12 @@ export const Main = () => (
 
             <Route exact path='/queries/arguments' component={(props) => (
               <WithArgs
+                {...props}
+              />
+            )}/>
+
+            <Route exacr path='/queries/custom' component={(props) => (
+              <Custom
                 {...props}
               />
             )}/>
