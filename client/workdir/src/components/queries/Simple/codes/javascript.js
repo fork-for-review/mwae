@@ -19,7 +19,7 @@ query SimpleQuery {
 \`;
 
 
-export const Simple = () => (
+const Example = () => (
   <QueryRenderer
     environment={environment}
     query={SimpleQuery}
