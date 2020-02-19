@@ -6,18 +6,11 @@ import environment from '../../../Environment';
 import {
   Input,
   InputGroup,
-  Jumbotron,
 } from 'reactstrap';
 
 /* Components */
-import { NavBread } from '../../NavBread';
-
-/* Styeld Components */
-import styled from 'styled-components';
-
-/* SyntaxHighlighter */
-import SyntaxHighlighter from 'react-syntax-highlighter';
-import { atomOneDark } from 'react-syntax-highlighter/dist/esm/styles/hljs';
+import { Doc } from '../../Doc';
+import { Post } from '../../Post';
 
 /* Code examples */
 import { pythonCode } from './codes/python';
@@ -39,51 +32,11 @@ query WithArgsQuery($first: Int!) {
 }
 `;
 
-/* Styles */
-const StyledPost = styled.div`
-  .jumbotron {
-    padding: 1rem;
-  }
-`;
-
-const Post = ({title, text, createdDate}) => (
-  <StyledPost>
-    <Jumbotron>
-      <h4>{title}</h4>
-      <p>{createdDate}</p>
-      <hr className="my-2" />
-      <p>{text}</p>
-    </Jumbotron>
-  </StyledPost>
-);
-
-export const WithArgs = (props) => {
+const Example = () => {
   const [value, setValue] = useState(0);
   const values = [0,1,2,3];
   return (
     <div>
-      <NavBread path={props.location.pathname} />
-
-      <h3>Backend</h3>
-      <a href="https://github.com/makridenko/mwae/blob/master/core/workdir/post/schema.py">{'schema.py'}</a>
-      <SyntaxHighlighter
-        language={'python'}
-        style={atomOneDark}
-        showLineNumbers
-      >
-        {pythonCode}
-      </SyntaxHighlighter>
-
-      <h3>Frontend</h3>
-      <SyntaxHighlighter
-        language={'js'}
-        style={atomOneDark}
-        showLineNumbers
-      >
-        {jsCode}
-      </SyntaxHighlighter>
-      
-      <h4>Example</h4>
       <InputGroup>
         <Input
           type="select"
@@ -95,9 +48,6 @@ export const WithArgs = (props) => {
           {values.map((val) => <option>{val}</option>)}
         </Input>
       </InputGroup>
-
-
-      <hr className="my-2" />
 
       <QueryRenderer
         environment={environment}
@@ -121,3 +71,14 @@ export const WithArgs = (props) => {
     </div>
   );
 };
+
+export const WithArgs = (props) => (
+  <Doc
+    example={<Example />}
+    pythonCode={pythonCode}
+    pythonCodeHref={'https://github.com/makridenko/mwae/blob/master/core/workdir/post/schema.py'}
+    jsCode={jsCode}
+    jsCodeHref={'https://github.com/makridenko/mwae/blob/master/client/workdir/src/components/queries/WithArgs/WithArgs.js'}
+    {...props}
+  />
+);

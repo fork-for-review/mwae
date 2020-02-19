@@ -6,14 +6,15 @@ import environment from '../../../Environment';
 import {
   Input,
   InputGroup,
-  Jumbotron,
 } from 'reactstrap';
 
 /* Components */
-import { NavBread } from '../../NavBread';
+import { Doc } from '../../Doc';
+import { Post } from '../../Post';
 
-/* Styled Components */
-import styled from 'styled-components';
+/* Code examples */
+import { pythonCode } from './codes/python';
+import { jsCode } from './codes/javascript';
 
 /* Query */
 const CustomQuery = graphql`
@@ -31,31 +32,10 @@ query CustomQuery($title: String!) {
 }
 `;
 
-/* Styles */
-const StyledPost = styled.div`
-  .jumbotron {
-    padding: 1rem;
-  }
-`;
-
-const Post = ({title, text, createdDate}) => (
-  <StyledPost>
-    <Jumbotron>
-      <h4>{title}</h4>
-      <p>{createdDate}</p>
-      <hr className="my-2" />
-      <p>{text}</p>
-    </Jumbotron>
-  </StyledPost>
-);
-
-export const Custom = (props) => {
+const Example = () => {
   const [value, setValue] = useState('');
   return (
     <div>
-      <NavBread path={props.location.pathname} />
-
-      <h4>Example</h4>
       <InputGroup>
         <Input
           type="text"
@@ -65,8 +45,6 @@ export const Custom = (props) => {
           onChange={e => setValue(e.target.value)}
         />
       </InputGroup>
-
-      <hr className="my-2" />
 
       <QueryRenderer
         environment={environment}
@@ -87,7 +65,17 @@ export const Custom = (props) => {
           return <div>Loading...</div>;
         }}
       />
-
     </div>
   );
 };
+
+export const Custom = (props) => (
+  <Doc
+    example={<Example />}
+    pythonCode={pythonCode}
+    pythonCodeHref={'https://github.com/makridenko/mwae/blob/master/core/workdir/post/schema.py'}
+    jsCode={jsCode}
+    jsCodeHref={'https://github.com/makridenko/mwae/blob/master/client/workdir/src/components/queries/Custom/Custom.js'}
+    {...props}
+  />
+);
