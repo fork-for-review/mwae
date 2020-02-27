@@ -2,6 +2,11 @@ import React from 'react';
 import { QueryRenderer, graphql } from 'react-relay';
 import environment from '../../../Environment';
 
+/* Reactstrap components */
+import {
+  Spinner,
+} from 'reactstrap';
+
 /* Components */
 import { Doc } from '../../Doc';
 import { Post } from '../../Post';
@@ -42,7 +47,7 @@ const Example = () => (
           />
         )}
       </div>;
-      return <div>Loading...</div>;
+      return <Spinner color="primary" />;
     }}
   />
 );

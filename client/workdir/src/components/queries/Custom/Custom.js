@@ -6,6 +6,7 @@ import environment from '../../../Environment';
 import {
   Input,
   InputGroup,
+  Spinner,
 } from 'reactstrap';
 
 /* Components */
@@ -62,7 +63,7 @@ const Example = () => {
               />
             )}
           </div>;
-          return <div>Loading...</div>;
+          return <Spinner color="primary" />;
         }}
       />
     </div>
