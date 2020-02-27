@@ -31,7 +31,7 @@ query SimpleQuery {
 }
 `;
 
-const Example = () => (
+export const ExampleSimpleQuery = () => (
   <QueryRenderer
     environment={environment}
     query={SimpleQuery}
@@ -54,7 +54,7 @@ const Example = () => (
 
 export const Simple = (props) => (
   <Doc
-    example={<Example />}
+    example={<ExampleSimpleQuery />}
     pythonCode={pythonCode}
     pythonCodeHref={'https://github.com/makridenko/mwae/blob/master/core/workdir/post/schema.py'}
     jsCode={jsCode}
