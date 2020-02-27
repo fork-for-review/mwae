@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { useState } from 'react';
 
 /* Components */
 import { NavBread } from './NavBread';
@@ -7,6 +7,13 @@ import { NavBread } from './NavBread';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { atomOneDark } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 
+/* Reactstrap components */
+import {
+  ListGroup,
+  ListGroupItem,
+  Collapse,
+} from 'reactstrap';
+
 
 const fileNameNum = (href) => {
   return href.split('/').length - 1;
@@ -14,8 +21,7 @@ const fileNameNum = (href) => {
 
 const CodeBlock = (props) => {
   return (
-    <Fragment>
-      <h3>{props.title}</h3>
+    <Collapse isOpen={props.isOpen}>
       <hr className="my-2" />
       <a href={props.href}>
         {props.href.split('/')[fileNameNum(props.href)]}
@@ -27,33 +33,49 @@ const CodeBlock = (props) => {
       >
         {props.code}
       </SyntaxHighlighter>
-    </Fragment>
+    </Collapse>
   );
 };
 
 export const Doc = (props) => {
+  const [backendIsOpen, setBackendIsOpen] = useState(false);
+  const [frontendIsOpen, setFrontendIsOpen] = useState(false);
+
+  const toggleBackend = () => setBackendIsOpen(!backendIsOpen);
+  const toggleFrontend = () => setFrontendIsOpen(!frontendIsOpen);
+
   return (
     <div>
       <NavBread path={props.location.pathname} />
+      <ListGroup>
 
-      <CodeBlock
-        title={'Backend'}
-        href={props.pythonCodeHref}
-        language={'python'}
-        code={props.pythonCode}
-      />
+        <ListGroupItem onClick={toggleBackend}>
+          <h3>Backend</h3>
+          <CodeBlock
+            isOpen={backendIsOpen}
+            href={props.pythonCodeHref}
+            language={'python'}
+            code={props.pythonCode}
+          />
+        </ListGroupItem>
 
-      <CodeBlock
-        title={'Frontend'}
-        href={props.jsCodeHref}
-        language={'js'}
-        code={props.jsCode}
-      />
+        <ListGroupItem onClick={toggleFrontend}>
+          <h3>Frontend</h3>
+          <CodeBlock
+            isOpen={frontendIsOpen}
+            href={props.jsCodeHref}
+            language={'js'}
+            code={props.jsCode}
+          />
+        </ListGroupItem>
 
-      <h4>Example</h4>
-      <hr className="my-2" />
-      {props.example}
+        <ListGroupItem>
+          <h4>Example</h4>
+          <hr className="my-2" />
+          {props.example}
+        </ListGroupItem>
 
+      </ListGroup>
     </div>
   );
 }
