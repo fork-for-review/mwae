@@ -18,10 +18,16 @@ import { Nav } from './Nav';
 import { SideNav } from './SideNav';
 
 /* Sections */
+
+// Query Examples
 import { Queries } from './queries/Queries';
 import { Simple } from './queries/Simple/Simple';
 import { WithArgs } from './queries/WithArgs/WithArgs';
 import { Custom } from './queries/Custom/Custom';
+
+// Mutation Examples
+import { Mutations } from './mutations/Mutations';
+import { SimpleCreatePostMutation } from './mutations/SimpleCreatePostMutation/SimpleCreatePostMutation';
 
 const StyledMain = styled.div`
   .row {
@@ -71,6 +77,16 @@ export const Main = () => (
 
             <Route exacr path='/queries/custom' component={(props) => (
               <Custom
+                {...props}
+              />
+            )}/>
+
+            <Route exact path='/mutations' component={() => (
+              <Mutations />
+            )}/>
+
+            <Route exact path='/mutations/simple' component={(props) => (
+              <SimpleCreatePostMutation
                 {...props}
               />
             )}/>

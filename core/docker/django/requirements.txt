@@ -30,7 +30,7 @@ python-docx>=0.8.8
 python-Levenshtein
 python3-anticaptcha
 pytz
-requests>=2.19.1
+requests==2.22.0
 rules>=2.2
 selenium>=3.141.0
 transliterate
