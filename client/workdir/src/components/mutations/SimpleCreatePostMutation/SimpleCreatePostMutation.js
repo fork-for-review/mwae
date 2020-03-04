@@ -1,11 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
+
+/* Mutations */
+import CreatePostMutation from '../../../mutations/CreatePostMutation';
 
 /* Reactstrap components */
 import {
+  Form,
+  FormGroup,
   Input,
-  InputGroup,
   Button,
 } from 'reactstrap';
+
+/* Styled Components */
+import styled from 'styled-components';
 
 /* Components */
 import { Doc } from '../../Doc';
@@ -15,25 +22,68 @@ import { ExampleSimpleQuery } from '../../queries/Simple/Simple'
 import { pythonCode } from './codes/python';
 import { jsCode } from './codes/javascript';
 
+/* Styles */
+const ExampleStyle = styled.div`
+  input.form-control {
+    margin-bottom: 1rem;
+  }
+
+  h5 {
+    font-weight: bold;
+  }
+`;
+
+const confirm = (title, text, {setReloadList}) => {
+  CreatePostMutation(title, text, (result, id) => {
+    if (result) {
+      setReloadList(true);
+      alert('Successfully create new post');
+    }
+    else
+      alert(id);
+  });
+};
+
 const Example = () => {
+  const [title, setTitle] = useState('');
+  const [text, setText] = useState('');
+  const [reloadList, setReloadList] = useState(false);
+
   return (
-    <div>
-      <h4>Create New Post</h4>
-      <InputGroup>
-        <Input
-          type="text"
-          placeholder="title"
-        />
-        <Input
-          type="text"
-          placeholder="text post"
-        />
-        <Button>Create Post</Button>
-      </InputGroup>
+    <ExampleStyle>
+
+      <Form>
+        <FormGroup>
+          <h5>Create New Post</h5>
+          <Input
+            type="text"
+            value={title}
+            onChange={e => setTitle(e.target.value)}
+            placeholder="title"
+          />
+          <Input
+            type="text"
+            value={text}
+            onChange={e => setText(e.target.value)}
+            placeholder="text post"
+          />
+          <Button
+            color="success"
+            onClick={() => confirm(title, text, {setReloadList})}
+          >
+            Create Post
+          </Button>
+        </FormGroup>
+      </Form>
+
       <hr className="my-2" />
-      <h4>All posts</h4>
-      <ExampleSimpleQuery />
-    </div>
+      <h5>All posts</h5>
+      <ExampleSimpleQuery
+        reloadList={reloadList}
+        setReloadList={setReloadList}
+      />
+
+    </ExampleStyle>
   );
 };
 

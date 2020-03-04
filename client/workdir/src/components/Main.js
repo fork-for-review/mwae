@@ -19,13 +19,13 @@ import { SideNav } from './SideNav';
 
 /* Sections */
 
-// Queries
+// Query Examples
 import { Queries } from './queries/Queries';
 import { Simple } from './queries/Simple/Simple';
 import { WithArgs } from './queries/WithArgs/WithArgs';
 import { Custom } from './queries/Custom/Custom';
 
-// Mutations
+// Mutation Examples
 import { Mutations } from './mutations/Mutations';
 import { SimpleCreatePostMutation } from './mutations/SimpleCreatePostMutation/SimpleCreatePostMutation';
 
