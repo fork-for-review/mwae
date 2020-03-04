@@ -11,6 +11,7 @@ from .models import (
 
 """ GraphQl filters """
 
+
 class PostFilter(django_filters.FilterSet):
     title = django_filters.CharFilter(lookup_expr='icontains')
 
@@ -20,7 +21,9 @@ class PostFilter(django_filters.FilterSet):
             'title',
         ]
 
+
 """ GraphQl/Relay Nodes """
+
 
 class PostNode(DjangoObjectType):
     class Meta:
@@ -31,6 +34,8 @@ class PostNode(DjangoObjectType):
 
 
 """ Mutations """
+
+
 class CreatePost(relay.ClientIDMutation):
     post = graphene.Field(PostNode)
 
@@ -43,8 +48,8 @@ class CreatePost(relay.ClientIDMutation):
         text = input.get('text')
 
         post = Post(
-            title = title,
-            text = text,
+            title=title,
+            text=text,
         )
         post.save()
 

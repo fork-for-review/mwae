@@ -31,22 +31,32 @@ query SimpleQuery {
 }
 `;
 
-export const ExampleSimpleQuery = () => (
+export const ExampleSimpleQuery = ({reloadList, setReloadList}) => (
   <QueryRenderer
     environment={environment}
     query={SimpleQuery}
-    render={({error, props}) => {
+    render={({error, props, retry}) => {
       if (error) return <div>{error.message}</div>;
-      else if (props) return <div>
-        {props.posts.edges.map(({node}) =>
-          <Post
-            key={node.id}
-            title={node.title}
-            text={node.text}
-            createdDate={node.createdDate}
-          />
-        )}
-      </div>;
+      else if (props) {
+
+        if (reloadList) {
+          setReloadList(false);
+          retry();
+        }
+
+        return (
+          <div>
+            {props.posts.edges.map(({node}) =>
+              <Post
+                key={node.id}
+                title={node.title}
+                text={node.text}
+                createdDate={node.createdDate}
+              />
+            )}
+          </div>
+        );
+      }
       return <Spinner color="primary" />;
     }}
   />
