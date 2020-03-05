@@ -53,7 +53,7 @@ class PostCreate(relay.ClientIDMutation):
         )
         post.save()
 
-        return CreatePost(post=post)
+        return PostCreate(post=post)
 
 
 class Query(graphene.ObjectType):

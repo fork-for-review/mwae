@@ -46,7 +46,7 @@ const Example = () => {
           value={value}
           onChange={e => setValue(e.target.value)}
         >
-          {values.map((val) => <option>{val}</option>)}
+          {values.map((val) => <option key={val}>{val}</option>)}
         </Input>
       </InputGroup>
 

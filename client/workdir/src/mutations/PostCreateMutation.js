@@ -29,8 +29,8 @@ export default (title, text, callback) => {
       mutation,
       variables,
       onCompleted: (response) => {
-        if (response.createPost)
-          callback(true, response.createPost.id);
+        if (response.postCreate)
+          callback(true, response.postCreate.id);
         else
           callback(false, response.error);
       },
