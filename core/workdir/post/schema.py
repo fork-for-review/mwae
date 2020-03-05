@@ -36,7 +36,7 @@ class PostNode(DjangoObjectType):
 """ Mutations """
 
 
-class CreatePost(relay.ClientIDMutation):
+class PostCreate(relay.ClientIDMutation):
     post = graphene.Field(PostNode)
 
     class Input:
@@ -72,4 +72,4 @@ class Mutation(graphene.ObjectType):
     """ Class for all mutations in this app """
 
     # Mutation that creates one post
-    create_post = CreatePost.Field()
+    post_create = PostCreate.Field()
