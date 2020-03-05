@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 /* Mutations */
-import CreatePostMutation from '../../../mutations/CreatePostMutation';
+import PostCreateMutation from '../../../mutations/PostCreateMutation';
 
 /* Reactstrap components */
 import {
@@ -34,7 +34,7 @@ const ExampleStyle = styled.div`
 `;
 
 const confirm = (title, text, {setReloadList}) => {
-  CreatePostMutation(title, text, (result, id) => {
+  PostCreateMutation(title, text, (result, id) => {
     if (result) {
       setReloadList(true);
       alert('Successfully create new post');

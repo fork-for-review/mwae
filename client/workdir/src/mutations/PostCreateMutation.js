@@ -6,8 +6,8 @@ import {
 import environment from '../Environment';
 
 const mutation = graphql`
-mutation CreatePostMutation($input: CreatePostInput!) {
-  createPost(input: $input) {
+mutation PostCreateMutation($input: PostCreateInput!) {
+  postCreate(input: $input) {
     post {
       id
     }

@@ -46,6 +46,7 @@ INSTALLED_APPS = [
 
     # Own applications
     'post',
+    'users',
 ]
 
 MIDDLEWARE = [
@@ -137,9 +138,17 @@ STATIC_URL = '/static/'
 # Graphene schema file location
 GRAPHENE = {
     'SCHEMA': 'app.schema.schema',
+    'MIDDLEWARE': [
+        'graphql_jwt.middleware.JSONWebTokenMiddleware',
+    ],
 }
 
 # CORS access settings
 CORS_ORIGIN_WHITELIST = (
     '127.0.0.1:21030',
 )
+
+AUTHENTICATION_BACKENDS = [
+    'graphql_jwt.backends.JSONWebTokenBackend',
+    'django.contrib.auth.backends.ModelBackend',
+]
