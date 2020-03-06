@@ -1,5 +1,6 @@
 version: '3'
 services:
+
   mwae_client:
     container_name: mwae_client_container
     build:
@@ -11,7 +12,6 @@ services:
     ports:
       - "21030:3000"
     command: /bin/sh -c "while true; do echo faking deamon; sleep 60; done"
-    # command: yarn start
 
   mwae_db:
     container_name: mwae_db_container
@@ -28,6 +28,16 @@ services:
     ports:
       - "21080:8000"
     command: /bin/sh -c "while true; do echo faking deamon; sleep 60; done"
-    # command: python manage.py runserver 0.0.0.0:8000
     depends_on:
       - mwae_db
+
+  mwae_go_github_service:
+    container_name: mwae_go_github_service_container
+    build:
+      context: ./github-service
+      dockerfile: ./docker/go/Dockerfile
+    volumes:
+      - ./github-service/workdir:/workdir
+    ports:
+      - "21090:8080"
+    command: /bin/sh -c "while true; do echo faking deamon; sleep 60; done"

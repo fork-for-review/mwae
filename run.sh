@@ -20,5 +20,10 @@ if [[ $1 = "front" ]]; then
   exit 1
 fi
 
+if [[ $1 = "github-service" ]]; then
+  docker exec -it mwae_go_github_service_container /bin/bash
+  exit 1
+fi
+
 # DEFAULT
 ./run.sh init
