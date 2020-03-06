@@ -8,7 +8,7 @@ import {
   BreadcrumbItem,
 } from 'reactstrap';
 
-export const Mutations = () => (
+export const MutationExamplesLinks = () => (
   <div>
     <Breadcrumb>
       <BreadcrumbItem active>Mutations</BreadcrumbItem>

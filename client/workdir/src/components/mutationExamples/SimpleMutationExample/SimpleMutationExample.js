@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 /* Mutations */
-import CreatePostMutation from '../../../mutations/CreatePostMutation';
+import PostCreateMutation from '../../../mutations/PostCreateMutation';
 
 /* Reactstrap components */
 import {
@@ -16,7 +16,7 @@ import styled from 'styled-components';
 
 /* Components */
 import { Doc } from '../../Doc';
-import { ExampleSimpleQuery } from '../../queries/Simple/Simple'
+import { ExampleSimpleQuery } from '../../queryExamples/Simple/Simple'
 
 /* Code examples */
 import { pythonCode } from './codes/python';
@@ -34,7 +34,7 @@ const ExampleStyle = styled.div`
 `;
 
 const confirm = (title, text, {setReloadList}) => {
-  CreatePostMutation(title, text, (result, id) => {
+  PostCreateMutation(title, text, (result, id) => {
     if (result) {
       setReloadList(true);
       alert('Successfully create new post');
@@ -87,7 +87,7 @@ const Example = () => {
   );
 };
 
-export const SimpleCreatePostMutation = (props) => (
+export const SimpleMutationExample = (props) => (
   <Doc
     example={<Example />}
     pythonCode={pythonCode}

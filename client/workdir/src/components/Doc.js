@@ -70,7 +70,7 @@ export const Doc = (props) => {
         </ListGroupItem>
 
         <ListGroupItem>
-          <h4>Example</h4>
+          <h3>Example</h3>
           <hr className="my-2" />
           {props.example}
         </ListGroupItem>
