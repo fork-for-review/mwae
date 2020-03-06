@@ -16,7 +16,7 @@ import styled from 'styled-components';
 
 /* Components */
 import { Doc } from '../../Doc';
-import { ExampleSimpleQuery } from '../../queries/Simple/Simple'
+import { ExampleSimpleQuery } from '../../queryExamples/Simple/Simple'
 
 /* Code examples */
 import { pythonCode } from './codes/python';
@@ -87,7 +87,7 @@ const Example = () => {
   );
 };
 
-export const SimpleCreatePostMutation = (props) => (
+export const SimpleMutationExample = (props) => (
   <Doc
     example={<Example />}
     pythonCode={pythonCode}

@@ -20,14 +20,14 @@ import { SideNav } from './SideNav';
 /* Sections */
 
 // Query Examples
-import { Queries } from './queries/Queries';
-import { Simple } from './queries/Simple/Simple';
-import { WithArgs } from './queries/WithArgs/WithArgs';
-import { Custom } from './queries/Custom/Custom';
+import { QueryExamplesLinks } from './queryExamples/QueryExamplesLinks';
+import { Simple } from './queryExamples/Simple/Simple';
+import { WithArgs } from './queryExamples/WithArgs/WithArgs';
+import { Custom } from './queryExamples/Custom/Custom';
 
 // Mutation Examples
-import { Mutations } from './mutations/Mutations';
-import { SimpleCreatePostMutation } from './mutations/SimpleCreatePostMutation/SimpleCreatePostMutation';
+import { MutationExamplesLinks } from './mutationExamples/MutationExamplesLinks';
+import { SimpleMutationExample } from './mutationExamples/SimpleMutationExample/SimpleMutationExample';
 
 const StyledMain = styled.div`
   .row {
@@ -60,7 +60,7 @@ export const Main = () => (
             )}/>
 
             <Route exact path='/queries' component={() => (
-              <Queries />
+              <QueryExamplesLinks />
             )}/>
 
             <Route exact path='/queries/simple' component={(props) => (
@@ -82,11 +82,11 @@ export const Main = () => (
             )}/>
 
             <Route exact path='/mutations' component={() => (
-              <Mutations />
+              <MutationExamplesLinks />
             )}/>
 
             <Route exact path='/mutations/simple' component={(props) => (
-              <SimpleCreatePostMutation
+              <SimpleMutationExample
                 {...props}
               />
             )}/>

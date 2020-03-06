@@ -8,7 +8,7 @@ import {
   BreadcrumbItem,
 } from 'reactstrap';
 
-export const Queries = () => (
+export const QueryExamplesLinks = () => (
   <div>
     <Breadcrumb>
       <BreadcrumbItem active>Queries</BreadcrumbItem>
@@ -26,7 +26,7 @@ export const Queries = () => (
       <ListGroupItem tag="a" href="/queries/custom">
         Query With Custom Arguments
       </ListGroupItem>
-      
+
     </ListGroup>
   </div>
 );
