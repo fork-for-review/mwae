@@ -34,10 +34,10 @@ services:
   mwae_go_github_service:
     container_name: mwae_go_github_service_container
     build:
-      context: ./github-service
+      context: ./services/github
       dockerfile: ./docker/go/Dockerfile
     volumes:
-      - ./github-service/workdir:/workdir
+      - ./services/github/workdir:/workdir
     ports:
       - "21090:8080"
     command: /bin/sh -c "while true; do echo faking deamon; sleep 60; done"
