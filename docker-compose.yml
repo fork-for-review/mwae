@@ -11,7 +11,7 @@ services:
       - ./volumes/data:/data
     ports:
       - "21030:3000"
-    command: /bin/sh -c "while true; do echo faking deamon; sleep 60; done"
+    command: ./run.sh
 
   mwae_db:
     container_name: mwae_db_container
@@ -27,7 +27,7 @@ services:
       - ./volumes/data:/data
     ports:
       - "21080:8000"
-    command: /bin/sh -c "while true; do echo faking deamon; sleep 60; done"
+    command: ./run.sh
     depends_on:
       - mwae_db
 
@@ -40,4 +40,4 @@ services:
       - ./services/github/workdir:/workdir
     ports:
       - "21090:8080"
-    command: /bin/sh -c "while true; do echo faking deamon; sleep 60; done"
+    command: ./run.sh
