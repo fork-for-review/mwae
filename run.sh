@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if [[ $1 = "init" ]]; then
-  docker-compose up -d
+  docker-compose up
   exit 1
 fi
 

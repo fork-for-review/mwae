@@ -10,6 +10,8 @@ fi
 if [[ $1 = "dev" ]]; then
   echo "Running develop web-server"
   pkill node
+  yarn
+  yarn run relay-compiler --src ./src --schema /data/schema.json
   yarn start
   exit 1
 fi
