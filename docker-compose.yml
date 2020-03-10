@@ -15,7 +15,10 @@ services:
 
   mwae_db:
     container_name: mwae_db_container
+    restart: always
     image: postgres
+    environment:
+      POSTGRES_PASSWORD: "Passw0rd33"
 
   mwae_core:
     container_name: mwae_core_container
