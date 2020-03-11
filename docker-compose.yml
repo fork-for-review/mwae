@@ -1,7 +1,7 @@
 version: '3'
 services:
 
-  client:
+  mwae_client:
     container_name: mwae_client
     build:
       context: ./client
@@ -13,7 +13,7 @@ services:
       - "21030:3000"
     command: ./run.sh
 
-  db:
+  mwae_db:
     container_name: mwae_db
     build:
       context: ./core
@@ -28,7 +28,7 @@ services:
       POSTGRES_USER: "postgres"
       POSTGRES_DB: "mwae"
 
-  rabbitmq:
+  mwae_rabbitmq:
     container_name: mwae_rabbitmq
     image: rabbitmq
     restart: on-failure
@@ -36,7 +36,7 @@ services:
       RABBITMQ_DEFAULT_USER: "rbmq_user"
       RABBITMQ_DEFAULT_PASS: "Passw0rd33"
 
-  core:
+  mwae_core:
     container_name: mwae_core
     build:
       context: ./core
@@ -48,10 +48,10 @@ services:
       - "21080:8000"
     command: ./run.sh
     depends_on:
-      - db
-      - rabbitmq
+      - mwae_db
+      - mwae_rabbitmq
 
-  celery_worker:
+  mwae_celery_worker:
     container_name: mwae_celery_worker
     build:
       context: ./core
@@ -60,11 +60,11 @@ services:
       - ./core/workdir:/workdir
     command: celery -A app worker -l info
     depends_on:
-      - db
-      - core
-      - rabbitmq
+      - mwae_db
+      - mwae_core
+      - mwae_rabbitmq
 
-  celery_beat:
+  mwae_celery_beat:
     container_name: mwae_celery_beat
     build:
       context: ./core
@@ -73,12 +73,12 @@ services:
       - ./core/workdir:/workdir
     command: celery -A app beat -l info
     depends_on:
-      - db
-      - core
-      - rabbitmq
-      - celery_worker
+      - mwae_db
+      - mwae_core
+      - mwae_rabbitmq
+      - mwae_celery_worker
 
-  flower:
+  mwae_flower:
     container_name: mwae_flower
     build:
       context: ./core
@@ -87,14 +87,14 @@ services:
       - ./core/workdir:/workdir
     command: celery flower -A app --address=0.0.0.0 --port=5555
     depends_on:
-      - db
-      - core
-      - rabbitmq
-      - celery_worker
+      - mwae_db
+      - mwae_core
+      - mwae_rabbitmq
+      - mwae_celery_worker
     ports:
       - "5555:5555"
 
-  go_github_service:
+  mwae_go_github_service:
     container_name: mwae_go_github_service
     build:
       context: ./services/github
