@@ -19,11 +19,14 @@ services:
       context: ./core
       dockerfile: ./docker/postgresql/Dockerfile
     volumes:
+      - ./volumes/db/scripts:/scripts
       - ./volumes/db/data:/var/lib/postgresql/data
       - ./volumes/db/backup:/backup
     restart: on-failure
     environment:
       POSTGRES_PASSWORD: "Passw0rd33"
+      POSTGRES_USER: "postgres"
+      POSTGRES_DB: "mwae"
 
   rabbitmq:
     container_name: mwae_rabbitmq
