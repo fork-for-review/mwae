@@ -44,6 +44,10 @@ INSTALLED_APPS = [
     # GraphQl-server implementation framework
     'graphene_django',
 
+    # Celery extensions
+    'django_celery_beat',
+    'django_celery_results',
+
     # Own applications
     'post',
     'users',
@@ -153,3 +157,7 @@ AUTHENTICATION_BACKENDS = [
     'graphql_jwt.backends.JSONWebTokenBackend',
     'django.contrib.auth.backends.ModelBackend',
 ]
+
+CELERY_BROKER_URL = 'amqp://rbmq_user:Passw0rd33@mwae_rabbitmq'
+CELERY_RESULT_BACKEND = 'django-db'
+CELERY_CACHE_BACKEND = 'django-cache'
