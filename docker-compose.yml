@@ -15,8 +15,14 @@ services:
 
   mwae_db:
     container_name: mwae_db_container
-    restart: always
-    image: postgres
+    build:
+      context: ./core
+      dockerfile: ./docker/postgresql/Dockerfile
+    # image: postgres:11.6
+    volumes:
+      - ./volumes/db/data:/var/lib/postgresql/data
+      - ./volumes/db/backup:/backup
+    # restart: always
     environment:
       POSTGRES_PASSWORD: "Passw0rd33"
 
