@@ -2,7 +2,7 @@ version: '3'
 services:
 
   mwae_client:
-    container_name: mwae_client_container
+    container_name: mwae_client
     build:
       context: ./client
       dockerfile: ./docker/nodejs/Dockerfile
@@ -14,14 +14,30 @@ services:
     command: ./run.sh
 
   mwae_db:
-    container_name: mwae_db_container
-    restart: always
-    image: postgres
+    container_name: mwae_db
+    build:
+      context: ./core
+      dockerfile: ./docker/postgresql/Dockerfile
+    volumes:
+      - ./volumes/db/scripts:/scripts
+      - ./volumes/db/data:/var/lib/postgresql/data
+      - ./volumes/db/backup:/backup
+    restart: on-failure
     environment:
       POSTGRES_PASSWORD: "Passw0rd33"
+      POSTGRES_USER: "postgres"
+      POSTGRES_DB: "mwae"
+
+  mwae_rabbitmq:
+    container_name: mwae_rabbitmq
+    image: rabbitmq
+    restart: on-failure
+    environment:
+      RABBITMQ_DEFAULT_USER: "rbmq_user"
+      RABBITMQ_DEFAULT_PASS: "Passw0rd33"
 
   mwae_core:
-    container_name: mwae_core_container
+    container_name: mwae_core
     build:
       context: ./core
       dockerfile: ./docker/django/Dockerfile
@@ -33,9 +49,53 @@ services:
     command: ./run.sh
     depends_on:
       - mwae_db
+      - mwae_rabbitmq
+
+  mwae_celery_worker:
+    container_name: mwae_celery_worker
+    build:
+      context: ./core
+      dockerfile: ./docker/django/Dockerfile
+    volumes:
+      - ./core/workdir:/workdir
+    command: celery -A app worker -l info
+    depends_on:
+      - mwae_db
+      - mwae_core
+      - mwae_rabbitmq
+
+  mwae_celery_beat:
+    container_name: mwae_celery_beat
+    build:
+      context: ./core
+      dockerfile: ./docker/django/Dockerfile
+    volumes:
+      - ./core/workdir:/workdir
+    command: celery -A app beat -l info
+    depends_on:
+      - mwae_db
+      - mwae_core
+      - mwae_rabbitmq
+      - mwae_celery_worker
+
+  mwae_flower:
+    container_name: mwae_flower
+    build:
+      context: ./core
+      dockerfile: ./docker/django/Dockerfile
+    volumes:
+      - ./core/workdir:/workdir
+    command: celery flower -A app --address=0.0.0.0 --port=5555
+    depends_on:
+      - mwae_db
+      - mwae_core
+      - mwae_rabbitmq
+      - mwae_celery_worker
+    ports:
+      - "5555:5555"
 
   mwae_go_github_service:
-    container_name: mwae_go_github_service_container
+    container_name: mwae_go_github_service
     build:
       context: ./services/github
       dockerfile: ./docker/go/Dockerfile

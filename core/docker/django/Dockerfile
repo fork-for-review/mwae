@@ -1,4 +1,4 @@
-FROM python
+FROM python:3.7.2
 
 # PRE CONFIGURATION, optimization for docker-compose building
 RUN mkdir /data
