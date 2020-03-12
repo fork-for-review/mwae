@@ -12,17 +12,37 @@ git clone https://github.com/makridenko/mwae.git && cd mwae
 Then in your terminal run:
 
 ```bash
-./run.sh init
+./manage.sh dc build
 ```
 
-To run bash in `mwae_client_container`:
+Next:
 
 ```bash
-./run.sh front
+./manage.sh dc up -d
 ```
 
-To run bash in `mwae_core_container`:
+Run migrate:
 
 ```bash
-./run.sh back
+./manage.sh core ./manage.py migrate
+```
+
+Create superuser:
+
+```bash
+./manage.sh core ./manage.py createsuperuser
+```
+
+Open [admin page](http://127.0.0.1:21080/admin) in browser and add some data.
+
+Now you can play around with [client page](http://127.0.0.1:21030/) or [GraphQL api](http://127.0.0.1:21080/api).
+
+To see logs of service run:
+```bash
+./manage.sh core logs
+```
+
+More info:
+```bash
+./manage.sh --help
 ```
